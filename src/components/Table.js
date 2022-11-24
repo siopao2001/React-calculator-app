@@ -5,14 +5,31 @@ import Button from './Button';
 export default function Table() {
   const [display, setDisplay] = useState('')
 
+  function evaluator(expr) {
+  let val = false;
+   
+  try {
+    eval(expr);
+  } catch (e) {
+    if (e instanceof SyntaxError) {
+      val = true;
+    }
+  }
+  return val;
+ };
+
   function screen(event) {
      if(event.target.innerText === '=') {
-        setDisplay(eval(display))
-     }else{
+        if(evaluator(display)) {
+           setDisplay('Error')
+        } else {
+            setDisplay(eval(display))
+           }
+     } else {
         setDisplay(prev => prev + event.target.innerText)
      }
      
-  }
+  };
 
   return (
     <table>
