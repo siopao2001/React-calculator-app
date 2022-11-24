@@ -6,7 +6,12 @@ export default function Table() {
   const [display, setDisplay] = useState('')
 
   function screen(event) {
-     setDisplay(prev => prev + event.target.innerText)
+     if(event.target.innerText === '=') {
+        setDisplay(eval(display))
+     }else{
+        setDisplay(prev => prev + event.target.innerText)
+     }
+     
   }
 
   return (
